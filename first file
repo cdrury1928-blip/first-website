@@ -1,1 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cooly Fruit Gold & Café — Fresh Produce, Gympie</title>
+<meta name="description" content="Fresh fruit, vegetables and everyday groceries in Gympie QLD. Proudly local, in Goldfields Plaza on Nash St.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F1E2;
+    --ink:#242B1D;
+    --green:#3E5631;
+    --green-deep:#2A3B21;
+    --gold:#C1901F;
+    --berry:#7B2D3B;
+    --crate:#B98247;
+    --line: rgba(36,43,29,0.16);
+    --radius: 2px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    font-size:16px;
+    line-height:1.55;
+  }
+  h1,h2,h3,.display{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    margin:0;
+    color:var(--green-deep);
+  }
+  a{color:inherit;}
+  img,svg{max-width:100%;display:block;}
+  .wrap{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+  button{font-family:inherit;}
 
+  /* ---------- Header / tab nav ---------- */
+  header{
+    position:sticky; top:0; z-index:20;
+    background:var(--paper);
+    border-bottom:1px solid var(--line);
+  }
+  .headbar{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 28px;
+    max-width:1080px; margin:0 auto;
+    gap:20px;
+    flex-wrap:wrap;
+  }
+  .brand{
+    display:flex; align-items:center; gap:10px;
+    font-family:'Fraunces', serif;
+    font-weight:600; font-size:1.15rem;
+    text-decoration:none; color:var(--green-deep);
+    background:none; border:none; cursor:pointer; padding:0;
+  }
+  .brand svg{width:30px;height:30px;flex-shrink:0;}
+
+  .tabnav{
+    display:flex; gap:6px;
+    flex-wrap:wrap;
+  }
+  .tabnav button{
+    background:none;
+    border:1px solid transparent;
+    border-radius:999px;
+    padding:8px 16px;
+    font-size:0.92rem;
+    font-weight:500;
+    color:var(--ink);
+    cursor:pointer;
+  }
+  .tabnav button:hover{ border-color:var(--line); }
+  .tabnav button[aria-selected="true"]{
+    background:var(--green-deep);
+    color:var(--paper);
+    font-weight:600;
+  }
+
+  /* ---------- Panels ---------- */
+  .panel{ display:none; }
+  .panel.is-active{ display:block; }
+
+  /* ---------- Page hero (small, inner panels) ---------- */
+  .page-hero{
+    background:
+      radial-gradient(ellipse at 18% -10%, rgba(193,144,31,0.20), transparent 55%),
+      var(--green-deep);
+    color:var(--paper);
+    padding:56px 0;
+    border-bottom:6px solid var(--gold);
+  }
+  .page-hero .kicker{
+    display:block; color:var(--gold); font-weight:600; font-size:0.88rem; margin-bottom:10px;
+  }
+  .page-hero h1{
+    color:var(--paper);
+    font-size:clamp(2rem, 4vw, 2.8rem);
+  }
+  .page-hero p{
+    margin-top:14px; max-width:52ch;
+    color:rgba(246,241,226,0.82);
+  }
+
+  /* ---------- Hero (home panel, large) ---------- */
+  .hero{
+    background:
+      radial-gradient(ellipse at 18% -10%, rgba(193,144,31,0.20), transparent 55%),
+      var(--green-deep);
+    color:var(--paper);
+    padding:76px 0 64px;
+    position:relative;
+    overflow:hidden;
+    border-bottom:6px solid var(--gold);
+  }
+  .hero .wrap{
+    display:grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap:48px;
+    align-items:center;
+  }
+  @media (max-width:860px){
+    .hero .wrap{grid-template-columns:1fr;}
+  }
+  .eyebrow-badge{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:0.85rem;
+    background:rgba(246,241,226,0.1);
+    border:1px solid rgba(246,241,226,0.35);
+    padding:6px 12px;
+    border-radius:999px;
+    margin-bottom:22px;
+  }
+  .stars{color:var(--gold); letter-spacing:1px;}
+  .hero h1{
+    font-size:clamp(2.3rem, 4.6vw, 3.6rem);
+    color:var(--paper);
+    line-height:1.06;
+    max-width:12ch;
+  }
+  .hero p.lede{
+    margin-top:18px;
+    max-width:46ch;
+    font-size:1.08rem;
+    color:rgba(246,241,226,0.85);
+  }
+  .hero-actions{
+    display:flex; gap:14px; margin-top:30px; flex-wrap:wrap;
+  }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:13px 22px;
+    font-family:'Work Sans', sans-serif;
+    font-weight:600; font-size:0.95rem;
+    text-decoration:none;
+    border-radius:var(--radius);
+    border:1px solid transparent;
+    cursor:pointer;
+    background:none;
+  }
+  .btn-gold{ background:var(--gold); color:var(--green-deep); }
+  .btn-gold:hover{ background:#d6a530; }
+  .btn-outline{ border-color:rgba(246,241,226,0.5); color:var(--paper); }
+  .btn-outline:hover{ border-color:var(--paper); }
+  .btn-outline-dark{ border-color:var(--green-deep); color:var(--green-deep); }
+  .btn-outline-dark:hover{ background:var(--green-deep); color:var(--paper); }
+
+  .hero-card{
+    background:var(--paper);
+    color:var(--ink);
+    padding:26px 26px 22px;
+    border-radius:var(--radius);
+    box-shadow: 6px 6px 0 rgba(0,0,0,0.18);
+  }
+  .hero-card dl{margin:0;}
+  .hero-card .row{
+    display:flex; gap:12px;
+    padding:11px 0;
+    border-top:1px solid var(--line);
+    font-size:0.94rem;
+  }
+  .hero-card .row:first-child{border-top:none;}
+  .hero-card .row .k{
+    width:26px; color:var(--gold); flex-shrink:0; font-weight:700;
+  }
+  .hero-card .status{
+    color:var(--green);
+    font-weight:600;
+  }
+
+  /* ---------- Crate divider ---------- */
+  .crate-strip{
+    display:flex;
+    background: repeating-linear-gradient(90deg, var(--crate) 0 46px, #a7723c 46px 48px);
+    height:14px;
+  }
+
+  /* ---------- Section shell ---------- */
+  section{padding:72px 0;}
+  .section-head{
+    max-width:56ch;
+    margin-bottom:40px;
+  }
+  .section-head .kicker{
+    display:block;
+    color:var(--berry);
+    font-weight:600;
+    font-size:0.92rem;
+    margin-bottom:10px;
+  }
+  .section-head h2{
+    font-size:clamp(1.7rem, 3vw, 2.3rem);
+  }
+  .section-head p{
+    margin-top:14px;
+    color:rgba(36,43,29,0.78);
+    font-size:1.02rem;
+  }
+
+  /* ---------- About ---------- */
+  .about{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap:56px;
+    align-items:center;
+  }
+  @media (max-width:820px){ .about{grid-template-columns:1fr;} }
+  .about-copy p{margin:0 0 16px; color:rgba(36,43,29,0.85);}
+  .about-copy p:last-child{margin-bottom:0;}
+  .tags{
+    display:flex; flex-wrap:wrap; gap:8px; margin-top:22px;
+  }
+  .tags span{
+    font-size:0.82rem;
+    padding:6px 12px;
+    border:1px solid var(--line);
+    border-radius:999px;
+    color:var(--green);
+  }
+
+  /* ---------- Menu / crate labels ---------- */
+  .menu-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap:22px;
+  }
+  @media (max-width:820px){ .menu-grid{grid-template-columns:1fr 1fr;} }
+  @media (max-width:560px){ .menu-grid{grid-template-columns:1fr;} }
+  .crate{
+    border:2px solid var(--green-deep);
+    padding:22px 20px 20px;
+    position:relative;
+  }
+  .crate::before{
+    content:"";
+    position:absolute; inset:6px;
+    border:1px solid var(--green-deep);
+    opacity:0.35;
+    pointer-events:none;
+  }
+  .crate h3{
+    font-size:1.25rem;
+    color:var(--green-deep);
+  }
+  .crate .price-note{
+    color:var(--berry);
+    font-size:0.86rem;
+    font-weight:600;
+    margin-top:4px;
+    display:block;
+  }
+  .crate ul{
+    list-style:none; margin:16px 0 0; padding:0;
+  }
+  .crate li{
+    display:flex; justify-content:space-between; gap:10px;
+    padding:8px 0;
+    border-top:1px dashed var(--line);
+    font-size:0.94rem;
+  }
+  .crate li:first-child{border-top:none;}
+
+  /* ---------- Visit / hours ---------- */
+  .visit{
+    display:grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap:48px;
+  }
+  @media (max-width:820px){ .visit{grid-template-columns:1fr;} }
+  .hours-table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+  }
+  .hours-table td{
+    padding:9px 0;
+    border-top:1px solid var(--line);
+    font-size:0.95rem;
+  }
+  .hours-table tr:first-child td{border-top:none;}
+  .hours-table td:last-child{text-align:right; color:rgba(36,43,29,0.75);}
+  .map-frame{
+    border:1px solid var(--line);
+    overflow:hidden;
+    height:100%;
+    min-height:320px;
+  }
+  .map-frame iframe{width:100%; height:100%; min-height:320px; border:0;}
+  .contact-list{list-style:none; margin:20px 0 0; padding:0;}
+  .contact-list li{
+    display:flex; gap:12px; align-items:baseline;
+    padding:9px 0;
+    border-top:1px solid var(--line);
+    font-size:0.95rem;
+  }
+  .contact-list li:first-child{border-top:none;}
+  .contact-list .k{color:var(--gold); font-weight:700; width:20px; flex-shrink:0;}
+
+  /* ---------- Reviews ---------- */
+  .reviews-band{
+    background:var(--green-deep);
+    color:var(--paper);
+    padding:64px 0;
+  }
+  .reviews-band .section-head h2{color:var(--paper);}
+  .reviews-band .section-head .kicker{color:var(--gold);}
+  .reviews-band .section-head p{color:rgba(246,241,226,0.75);}
+  .rating-hero{
+    display:flex; align-items:center; gap:22px;
+    margin-bottom:36px;
+    flex-wrap:wrap;
+  }
+  .rating-num{
+    font-family:'Fraunces', serif;
+    font-size:3.4rem;
+    line-height:1;
+    color:var(--gold);
+  }
+  .rating-meta .stars{font-size:1.2rem;}
+  .rating-meta p{margin:4px 0 0; color:rgba(246,241,226,0.75); font-size:0.92rem;}
+  .quote-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
+  }
+  @media (max-width:820px){ .quote-grid{grid-template-columns:1fr;} }
+  .quote{
+    border-top:2px solid var(--gold);
+    padding-top:16px;
+  }
+  .quote p{margin:0; color:rgba(246,241,226,0.9); font-size:0.98rem;}
+  .quote span.byline{
+    display:block; margin-top:12px;
+    font-size:0.85rem; color:rgba(246,241,226,0.6);
+  }
+  .quote .stars{font-size:0.9rem; margin-bottom:8px; display:block;}
+
+  /* ---------- CTA band ---------- */
+  .cta-band{
+    background:rgba(193,144,31,0.1);
+    padding:56px 0;
+    text-align:center;
+  }
+  .cta-band h2{font-size:clamp(1.5rem, 3vw, 2rem);}
+  .cta-band p{margin:14px auto 0; max-width:44ch; color:rgba(36,43,29,0.78);}
+  .cta-band .hero-actions{justify-content:center; margin-top:26px;}
+
+  /* ---------- Footer ---------- */
+  footer{
+    padding:48px 0 36px;
+    border-top:1px solid var(--line);
+  }
+  .foot-grid{
+    display:flex; justify-content:space-between; gap:24px; flex-wrap:wrap;
+  }
+  .foot-brand{
+    font-family:'Fraunces', serif; font-weight:600; font-size:1.05rem; color:var(--green-deep);
+  }
+  .foot-brand p{
+    font-family:'Work Sans', sans-serif;
+    font-weight:400;
+    color:rgba(36,43,29,0.7);
+    font-size:0.9rem;
+    margin-top:8px;
+    max-width:34ch;
+  }
+  .foot-links{display:flex; gap:40px; flex-wrap:wrap;}
+  .foot-links div h4{
+    font-size:0.82rem; text-transform:none; color:var(--berry);
+    margin:0 0 10px; font-weight:600;
+  }
+  .foot-links button, .foot-links a{
+    display:block; text-decoration:none; font-size:0.9rem;
+    color:var(--ink); padding:4px 0;
+    background:none; border:none; text-align:left; cursor:pointer;
+    font-family:inherit;
+  }
+  .foot-links button:hover, .foot-links a:hover{color:var(--gold);}
+  .foot-bottom{
+    margin-top:40px; padding-top:20px; border-top:1px solid var(--line);
+    font-size:0.82rem; color:rgba(36,43,29,0.55);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="headbar">
+    <button class="brand" data-goto="home">
+      <svg viewBox="0 0 32 32" fill="none"><path d="M16 4c-6 0-10 4.2-10 10 0 7 6 12 10 14 4-2 10-7 10-14 0-5.8-4-10-10-10Z" fill="#C1901F"/><path d="M16 2c1 2 0.5 4-1 5" stroke="#3E5631" stroke-width="1.6" stroke-linecap="round"/></svg>
+      Cooly Fruit Gold &amp; Café
+    </button>
+    <div class="tabnav" role="tablist" aria-label="Site sections">
+      <button role="tab" data-goto="home" aria-selected="true">Home</button>
+      <button role="tab" data-goto="about" aria-selected="false">About</button>
+      <button role="tab" data-goto="menu" aria-selected="false">Menu</button>
+      <button role="tab" data-goto="visit" aria-selected="false">Visit</button>
+      <button role="tab" data-goto="reviews" aria-selected="false">Reviews</button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============ HOME ============ -->
+  <div class="panel is-active" id="panel-home" role="tabpanel">
+    <section class="hero" style="padding-top:76px;">
+      <div class="wrap">
+        <div>
+          <div class="eyebrow-badge">
+            <span class="stars">★★★★☆</span>
+            <span>4.4 from 34 shoppers in Gympie</span>
+          </div>
+          <h1>Fresh for your kitchen. Better for your table.</h1>
+          <p class="lede">Vibrant fruit, crisp veggies and everyday groceries, picked out for you in the heart of Goldfields Plaza. Proudly local, proudly fresh.</p>
+          <div class="hero-actions">
+            <button class="btn btn-gold" data-goto="visit">Get directions</button>
+            <a class="btn btn-outline" href="tel:0435921614">Call 0435 921 614</a>
+          </div>
+        </div>
+        <div class="hero-card">
+          <dl>
+            <div class="row"><span class="k">◆</span><span>35 Nash St, Gympie QLD 4570 — inside Goldfields Plaza</span></div>
+            <div class="row"><span class="k">◆</span><span class="status">Open now — closes 6&nbsp;pm</span></div>
+            <div class="row"><span class="k">◆</span><span>0435 921 614</span></div>
+            <div class="row"><span class="k">◆</span><span>coolyfruitgold.com.au</span></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <div class="crate-strip" aria-hidden="true"></div>
+
+    <section>
+      <div class="wrap about">
+        <div class="about-copy">
+          <span class="kicker" style="color:var(--berry); font-weight:600; display:block; margin-bottom:10px;">About us</span>
+          <h2 style="margin-bottom:18px;">Good food starts with good ingredients.</h2>
+          <p>Fill your kitchen with the kind of freshness you can see, feel and taste. From vibrant fruits and crisp veggies to everyday groceries, find your fresh picks all in one place.</p>
+          <button class="btn btn-outline-dark" data-goto="about">Read our story</button>
+        </div>
+        <svg viewBox="0 0 420 380" role="img" aria-label="Illustration of a wooden crate filled with fruit and vegetables">
+          <rect x="30" y="210" width="360" height="140" fill="#B98247"/>
+          <rect x="30" y="210" width="360" height="18" fill="#A7723C"/>
+          <rect x="30" y="332" width="360" height="18" fill="#8F5F31"/>
+          <rect x="46" y="228" width="12" height="104" fill="#8F5F31"/>
+          <rect x="362" y="228" width="12" height="104" fill="#8F5F31"/>
+          <circle cx="120" cy="190" r="46" fill="#7B2D3B"/>
+          <circle cx="200" cy="170" r="54" fill="#C1901F"/>
+          <circle cx="285" cy="195" r="42" fill="#3E5631"/>
+          <ellipse cx="150" cy="230" rx="70" ry="18" fill="#4B6B3A"/>
+          <path d="M118 148c4-14 14-20 22-20" stroke="#3E5631" stroke-width="5" stroke-linecap="round" fill="none"/>
+          <path d="M198 118c3-12 11-18 20-18" stroke="#4B6B3A" stroke-width="5" stroke-linecap="round" fill="none"/>
+          <ellipse cx="215" cy="112" rx="18" ry="9" fill="#4B6B3A" transform="rotate(-20 215 112)"/>
+        </svg>
+      </div>
+    </section>
+
+    <section style="background:rgba(193,144,31,0.07);">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="kicker">On the shelves</span>
+          <h2>What you'll find in store</h2>
+          <p>A snapshot of our range — see the full list on the menu tab, or ask in store for what's freshest today.</p>
+        </div>
+        <div class="menu-grid">
+          <div class="crate">
+            <h3>Fruit</h3>
+            <span class="price-note">Picked fresh, weekly</span>
+            <ul>
+              <li><span>Bananas</span><span>Local</span></li>
+              <li><span>Mangoes</span><span>Seasonal</span></li>
+              <li><span>Apples &amp; pears</span><span>Daily</span></li>
+            </ul>
+          </div>
+          <div class="crate">
+            <h3>Vegetables</h3>
+            <span class="price-note">Crisp &amp; local</span>
+            <ul>
+              <li><span>Leafy greens</span><span>Daily</span></li>
+              <li><span>Root veg</span><span>Daily</span></li>
+              <li><span>Tomatoes</span><span>Local</span></li>
+            </ul>
+          </div>
+          <div class="crate">
+            <h3>Café &amp; grocery</h3>
+            <span class="price-note">Grab &amp; go</span>
+            <ul>
+              <li><span>Coffee</span><span>Made fresh</span></li>
+              <li><span>Juices &amp; smoothies</span><span>Made fresh</span></li>
+              <li><span>Pantry staples</span><span>In stock</span></li>
+            </ul>
+          </div>
+        </div>
+        <div style="margin-top:32px;">
+          <button class="btn btn-outline-dark" data-goto="menu">See the full range</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="reviews-band">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="kicker">What Gympie says</span>
+          <h2>Reviewed by the locals</h2>
+        </div>
+        <div class="rating-hero">
+          <div class="rating-num">4.4</div>
+          <div class="rating-meta">
+            <div class="stars">★★★★☆</div>
+            <p>34 Google reviews · Fruit and vegetable store</p>
+          </div>
+        </div>
+        <button class="btn btn-gold" data-goto="reviews">Read the reviews</button>
+      </div>
+    </section>
+
+    <div class="cta-band">
+      <div class="wrap">
+        <h2>Come say hello in Goldfields Plaza</h2>
+        <p>Open today until 6&nbsp;pm at 35 Nash St, Gympie. Fresh picks, every visit.</p>
+        <div class="hero-actions">
+          <button class="btn btn-gold" data-goto="visit">Visit &amp; hours</button>
+          <a class="btn btn-outline-dark" href="tel:0435921614">Call the store</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ ABOUT ============ -->
+  <div class="panel" id="panel-about" role="tabpanel">
+    <section class="page-hero">
+      <div class="wrap">
+        <span class="kicker">About us</span>
+        <h1>Good food starts with good ingredients.</h1>
+        <p>Fill your kitchen with the kind of freshness you can see, feel and taste — from vibrant fruits and crisp veggies to everyday groceries.</p>
+      </div>
+    </section>
+    <div class="crate-strip" aria-hidden="true"></div>
+    <section>
+      <div class="wrap about">
+        <div class="about-copy">
+          <h2 style="margin-bottom:18px;">Fresh for your kitchen. Better for your table.</h2>
+          <p>We're a family-run fruit and vegetable store in the middle of Gympie, tucked inside Goldfields Plaza on Nash St. Our aim is simple: fill the shelves with produce that's genuinely fresh, sourced as close to home as we can manage, and priced fairly for everyday shopping.</p>
+          <p>From vibrant fruit and crisp veggies to the everyday groceries that round out a shopping list, we want this to be the easy stop that makes your kitchen better — not just fuller.</p>
+          <p>We're proudly local, and proud to be part of the Gympie community. Drop in, say hello, and let us know what you're after — if we don't have it, we'll try to get it in.</p>
+          <div class="tags">
+            <span>Farm-fresh produce</span>
+            <span>Local growers</span>
+            <span>Everyday groceries</span>
+            <span>Family run</span>
+            <span>Shop local</span>
+          </div>
+        </div>
+        <svg viewBox="0 0 420 380" role="img" aria-label="Illustration of a wooden crate filled with fruit and vegetables">
+          <rect x="30" y="210" width="360" height="140" fill="#B98247"/>
+          <rect x="30" y="210" width="360" height="18" fill="#A7723C"/>
+          <rect x="30" y="332" width="360" height="18" fill="#8F5F31"/>
+          <rect x="46" y="228" width="12" height="104" fill="#8F5F31"/>
+          <rect x="362" y="228" width="12" height="104" fill="#8F5F31"/>
+          <circle cx="120" cy="190" r="46" fill="#7B2D3B"/>
+          <circle cx="200" cy="170" r="54" fill="#C1901F"/>
+          <circle cx="285" cy="195" r="42" fill="#3E5631"/>
+          <ellipse cx="150" cy="230" rx="70" ry="18" fill="#4B6B3A"/>
+          <path d="M118 148c4-14 14-20 22-20" stroke="#3E5631" stroke-width="5" stroke-linecap="round" fill="none"/>
+          <path d="M198 118c3-12 11-18 20-18" stroke="#4B6B3A" stroke-width="5" stroke-linecap="round" fill="none"/>
+          <ellipse cx="215" cy="112" rx="18" ry="9" fill="#4B6B3A" transform="rotate(-20 215 112)"/>
+        </svg>
+      </div>
+    </section>
+    <div class="cta-band">
+      <div class="wrap">
+        <h2>Come see what's fresh today</h2>
+        <p>Open until 6&nbsp;pm at 35 Nash St, Gympie — inside Goldfields Plaza.</p>
+        <div class="hero-actions">
+          <button class="btn btn-gold" data-goto="visit">Visit &amp; hours</button>
+          <button class="btn btn-outline-dark" data-goto="menu">See what's in store</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ MENU ============ -->
+  <div class="panel" id="panel-menu" role="tabpanel">
+    <section class="page-hero">
+      <div class="wrap">
+        <span class="kicker">On the shelves</span>
+        <h1>What you'll find in store</h1>
+        <p>Our range shifts with the seasons. Here's a snapshot of what's usually stocked — ask in store for what's freshest today.</p>
+      </div>
+    </section>
+    <div class="crate-strip" aria-hidden="true"></div>
+    <section>
+      <div class="wrap">
+        <div class="menu-grid">
+          <div class="crate">
+            <h3>Fruit</h3>
+            <span class="price-note">Picked fresh, weekly</span>
+            <ul>
+              <li><span>Bananas</span><span>Local</span></li>
+              <li><span>Mangoes</span><span>Seasonal</span></li>
+              <li><span>Apples &amp; pears</span><span>Daily</span></li>
+              <li><span>Stone fruit</span><span>Seasonal</span></li>
+              <li><span>Berries</span><span>Seasonal</span></li>
+              <li><span>Citrus</span><span>Daily</span></li>
+            </ul>
+          </div>
+          <div class="crate">
+            <h3>Vegetables</h3>
+            <span class="price-note">Crisp &amp; local</span>
+            <ul>
+              <li><span>Leafy greens</span><span>Daily</span></li>
+              <li><span>Root veg</span><span>Daily</span></li>
+              <li><span>Tomatoes</span><span>Local</span></li>
+              <li><span>Capsicum &amp; chilli</span><span>Daily</span></li>
+              <li><span>Pumpkin &amp; squash</span><span>Seasonal</span></li>
+              <li><span>Fresh herbs</span><span>Fresh cut</span></li>
+            </ul>
+          </div>
+          <div class="crate">
+            <h3>Café &amp; grocery</h3>
+            <span class="price-note">Grab &amp; go</span>
+            <ul>
+              <li><span>Coffee</span><span>Made fresh</span></li>
+              <li><span>Juices &amp; smoothies</span><span>Made fresh</span></li>
+              <li><span>Pantry staples</span><span>In stock</span></li>
+              <li><span>Local honey &amp; eggs</span><span>In stock</span></li>
+              <li><span>Nuts &amp; dried fruit</span><span>In stock</span></li>
+              <li><span>Snacks &amp; drinks</span><span>In stock</span></li>
+            </ul>
+          </div>
+        </div>
+        <p style="margin-top:28px; font-size:0.9rem; color:rgba(36,43,29,0.6);">Availability changes with the season and what's freshest from local growers — this is a guide, not a live stocktake. Give us a call on <a href="tel:0435921614" style="color:var(--berry); font-weight:600;">0435 921 614</a> if you're after something specific.</p>
+      </div>
+    </section>
+    <div class="cta-band">
+      <div class="wrap">
+        <h2>Ready to shop?</h2>
+        <p>Open today until 6&nbsp;pm at 35 Nash St, Gympie — inside Goldfields Plaza.</p>
+        <div class="hero-actions">
+          <button class="btn btn-gold" data-goto="visit">Visit &amp; hours</button>
+          <a class="btn btn-outline-dark" href="tel:0435921614">Call the store</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ VISIT ============ -->
+  <div class="panel" id="panel-visit" role="tabpanel">
+    <section class="page-hero">
+      <div class="wrap">
+        <span class="kicker">Visit</span>
+        <h1>Find us in Goldfields Plaza</h1>
+        <p>35 Nash St, Gympie QLD 4570 — easy parking, easy to find, easy to pop into.</p>
+      </div>
+    </section>
+    <div class="crate-strip" aria-hidden="true"></div>
+    <section>
+      <div class="wrap visit">
+        <div>
+          <div class="section-head" style="margin-bottom:0;">
+            <span class="kicker">Hours &amp; contact</span>
+            <h2>Come see us today</h2>
+          </div>
+          <table class="hours-table">
+            <tr><td>Today</td><td class="status" style="color:var(--green); font-weight:600;">Open · closes 6&nbsp;pm</td></tr>
+            <tr><td>Address</td><td>35 Nash St, Gympie QLD 4570</td></tr>
+            <tr><td>Plaza</td><td>Goldfields Plaza</td></tr>
+            <tr><td>Phone</td><td>0435 921 614</td></tr>
+          </table>
+          <ul class="contact-list">
+            <li><span class="k">☎</span><a href="tel:0435921614">0435 921 614</a></li>
+            <li><span class="k">🌐</span><a href="https://coolyfruitgold.com.au" target="_blank" rel="noopener">coolyfruitgold.com.au</a></li>
+            <li><span class="k">✉</span><a href="https://facebook.com" target="_blank" rel="noopener">facebook.com</a></li>
+          </ul>
+          <a class="btn btn-gold" style="margin-top:24px;" href="https://www.google.com/maps/search/?api=1&query=Cooly+Fruit+Gold+%26+Caf%C3%A9+35+Nash+St+Gympie+QLD+4570" target="_blank" rel="noopener">Open in Google Maps</a>
+        </div>
+        <div class="map-frame">
+          <iframe title="Map to Cooly Fruit Gold & Café" loading="lazy"
+            src="https://www.google.com/maps?q=35+Nash+St,+Gympie+QLD+4570&output=embed"></iframe>
+        </div>
+      </div>
+    </section>
+    <div class="cta-band">
+      <div class="wrap">
+        <h2>Questions before you visit?</h2>
+        <p>Give us a call — we're happy to check what's in stock or set something aside.</p>
+        <div class="hero-actions">
+          <a class="btn btn-gold" href="tel:0435921614">Call 0435 921 614</a>
+          <button class="btn btn-outline-dark" data-goto="menu">See what's in store</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ REVIEWS ============ -->
+  <div class="panel" id="panel-reviews" role="tabpanel">
+    <section class="page-hero">
+      <div class="wrap">
+        <span class="kicker">What Gympie says</span>
+        <h1>Reviewed by the locals</h1>
+        <p>4.4 stars from 34 Google reviews — thank you to everyone who's shopped with us.</p>
+      </div>
+    </section>
+    <div class="crate-strip" aria-hidden="true"></div>
+    <section class="reviews-band" style="padding-top:56px;">
+      <div class="wrap">
+        <div class="rating-hero">
+          <div class="rating-num">4.4</div>
+          <div class="rating-meta">
+            <div class="stars">★★★★☆</div>
+            <p>34 Google reviews · Fruit and vegetable store</p>
+          </div>
+        </div>
+        <div class="quote-grid">
+          <div class="quote">
+            <span class="stars">★★★★★</span>
+            <p>"Great range of fresh fruit and veg, and the staff always have time for a chat."</p>
+            <span class="byline">Google review</span>
+          </div>
+          <div class="quote">
+            <span class="stars">★★★★★</span>
+            <p>"My go-to for produce in Gympie — everything is genuinely fresh."</p>
+            <span class="byline">Google review</span>
+          </div>
+          <div class="quote">
+            <span class="stars">★★★★☆</span>
+            <p>"Handy location in Goldfields Plaza, easy to duck in for essentials."</p>
+            <span class="byline">Google review</span>
+          </div>
+        </div>
+        <p style="margin-top:28px; font-size:0.85rem; color:rgba(246,241,226,0.6);">Sample quotes shown for layout — swap in your real review highlights, or embed a live Google Reviews widget here.</p>
+      </div>
+    </section>
+    <div class="cta-band">
+      <div class="wrap">
+        <h2>Leave us a review</h2>
+        <p>Shopped with us recently? We'd love to hear how it went.</p>
+        <div class="hero-actions">
+          <a class="btn btn-gold" href="https://www.google.com/maps/search/?api=1&query=Cooly+Fruit+Gold+%26+Caf%C3%A9+35+Nash+St+Gympie+QLD+4570" target="_blank" rel="noopener">Leave a Google review</a>
+          <button class="btn btn-outline-dark" data-goto="visit">Visit &amp; hours</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="wrap foot-grid">
+    <div>
+      <div class="foot-brand">Cooly Fruit Gold &amp; Café</div>
+      <p>35 Nash St, Gympie QLD 4570 — Goldfields Plaza. Fresh groceries, farm-fresh produce, proudly local.</p>
+    </div>
+    <div class="foot-links">
+      <div>
+        <h4>Explore</h4>
+        <button data-goto="home">Home</button>
+        <button data-goto="about">About</button>
+        <button data-goto="menu">Menu</button>
+        <button data-goto="reviews">Reviews</button>
+      </div>
+      <div>
+        <h4>Get in touch</h4>
+        <a href="tel:0435921614">0435 921 614</a>
+        <a href="https://coolyfruitgold.com.au" target="_blank" rel="noopener">Website</a>
+        <a href="https://facebook.com" target="_blank" rel="noopener">Facebook</a>
+      </div>
+    </div>
+  </div>
+  <div class="wrap foot-bottom">
+    © <span class="year"></span> Cooly Fruit Gold &amp; Café, Gympie. #ShopLocal #FreshFood
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var tabs = document.querySelectorAll('[data-goto]');
+    var panels = document.querySelectorAll('.panel');
+
+    function showSection(name, pushHash){
+      panels.forEach(function(p){
+        p.classList.toggle('is-active', p.id === 'panel-' + name);
+      });
+      document.querySelectorAll('.tabnav button').forEach(function(b){
+        b.setAttribute('aria-selected', b.dataset.goto === name ? 'true' : 'false');
+      });
+      if (pushHash !== false) {
+        history.replaceState(null, '', '#' + name);
+      }
+      window.scrollTo({top:0, behavior:'auto'});
+    }
+
+    tabs.forEach(function(el){
+      el.addEventListener('click', function(){
+        showSection(el.dataset.goto);
+      });
+    });
+
+    var initial = (location.hash || '#home').replace('#','');
+    var valid = ['home','about','menu','visit','reviews'];
+    showSection(valid.indexOf(initial) !== -1 ? initial : 'home', false);
+
+    document.querySelectorAll('.year').forEach(function(el){
+      el.textContent = new Date().getFullYear();
+    });
+  })();
+</script>
+</body>
+</html>
